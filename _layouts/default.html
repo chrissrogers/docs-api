@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{site.name}}</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/syntax.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/lunr.min.js"></script>
+    <script src="js/index.js"></script>
+  </head>
+  <body>
+    <nav>
+      <header class="logo">
+        <h1><a href="/">Recurly</a></h1>
+      </header>
+
+      <form action="#">
+        <input type="text" id="search" placeholder="search">
+      </form>
+
+      <ul>
+        {% for topic in site.data.index %}
+          {% capture handle %}{{topic.title | downcase | replace: ' ', '-' | handle}}{% endcapture %}
+          <li id="{{handle}}-nav">
+            <a href="#{{handle}}">{{topic.title}}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    {% for topic in site.data.index %}
+      {% capture handle %}{{topic.title | downcase | replace: ' ', '-' | handle}}{% endcapture %}
+      <article id="{{handle}}">
+        <h2>
+          <a href="#{{handle}}">{{topic.title}}</a>
+        </h2>
+        <section id="{{handle}}-body">
+          {% include {{topic.body}} %}
+        </section>
+      </article>
+
+      <script>
+        topic('{{topic.title}}', '{{topic.tags | join ' '}}', '{{handle}}');
+      </script>
+    {% endfor %}
+  </body>
+</html>

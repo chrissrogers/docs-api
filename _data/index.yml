@@ -1,0 +1,11 @@
+- title: Subscriptions
+  tags: [subscriptions, accounts]
+  body: subscriptions.md
+
+- title: Accounts
+  tags: [accounts, billing info]
+  body: accounts.md
+
+- title: Billing Info
+  tags: [billing info]
+  body: billing_info.md
